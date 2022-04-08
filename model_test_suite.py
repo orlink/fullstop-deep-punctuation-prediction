@@ -36,7 +36,8 @@ if __name__ == "__main__":
             result = trainer.run_training()
             run_config["result"] = result    
             completed_runs["tests"][run_config["id"]] = run_config
-        except:
+        except (ValueError, OSError, MemoryError, RuntimeError) as ex:
+            print("Unexpected error: ", ex);
             print("Unexpected error:", sys.exc_info()[0])         
         
 
