@@ -60,7 +60,7 @@
             "id":22,
             "task":2,
             "model":"xlm-roberta-base",
-             "languages":["bg", "en" ],
+             "languages":["bg", "en", "de", "fr", "es", "it", "pl", "nl", "cs", "pt", "sk", "sl"],
             "augmentation":[""],
             "data_percentage":1,
             "use_token_type_ids":false,
