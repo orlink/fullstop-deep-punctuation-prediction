@@ -11,6 +11,8 @@ from tqdm import tqdm
 import datetime
 import random
 from tools import print_cm
+from multiprocessing import Pool
+import os
 
 class ModelTrainer():
     def __init__(self, task:int, model:str,run_name:str, data_percentage:float,use_token_type_ids:bool, opimizer_config, tokenizer_config,languages,do_hyperparameter_search = False, **args):
@@ -99,9 +101,19 @@ class ModelTrainer():
             }
         return metrics   
 
+    def load_data_dev2(self, language):
+        return load ("data/sepp_nlg_2021_train_dev_data_v5.zip", "dev", language, subtask = 2)
+    def load_data_train(self, language):
+        return load ("data/sepp_nlg_2021_train_dev_data_v5.zip", "train", language, subtask = 2)
+
+
     def run_training(self):
         val_data = []
         train_data = []
+        print (self.languages)
+        #with Pool() as pool:
+        #    val_data = np.array(pool.map(self.load_data_dev2, self.languages))
+        #    train_data = np.array(pool.map(self.load_data_dev2, self.languages))
 
         for language in self.languages:
             val_data += load("data/sepp_nlg_2021_train_dev_data_v5.zip","dev",language,subtask=self.task)
